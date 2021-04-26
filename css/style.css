@@ -76,6 +76,9 @@ header {
 #header-top i {
     margin: -2px;
 }
+#header-top .circle {
+    margin-left: 20px;
+}
 header nav ul {
     list-style: none;
 }
@@ -96,8 +99,10 @@ main {
 main li {
     margin: 15px 0;
 }
+main ol {
+    margin-left: 18px;
+}
 main ol > ol {
-    margin-left: 20px;
     list-style-type: lower-alpha;
 }
 

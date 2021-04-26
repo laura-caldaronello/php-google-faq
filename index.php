@@ -153,7 +153,7 @@
                                 [
                                     'what' => 'Contattaci',
                                     'where' => '#',
-                                    'icon' => ''
+                                    'icon' => 'fas fa-external-link-alt'
                                 ]
                             ]    
                         ]
@@ -258,6 +258,9 @@
                                 echo $level2value['text'][$i];
                             }
                             elseif ($i == $end) {
+                                if (array_key_exists('icon',$level2value['links'][$k])) {
+                                    echo ' <i class="' . $level2value['links'][$k]['icon'] . '"></i>';
+                                };
                                 echo '</a>';
                                 echo $level2value['text'][$i];
                             }
@@ -302,7 +305,39 @@
                                 }
                                 elseif (substr($level3key,0,1) == 'p' && ctype_digit(substr($level3key,1,1))) {
             ?>
-            <p> <?php echo $level3value['text']; ?> </p>
+            <p>
+                <?php
+                    if (array_key_exists('links',$level3value)) {
+                        $pos2 = [];
+                        $len2 = [];
+                        for ($i = 0; $i < count($level3value['links']); $i++) {
+                            $pos2[$i] = strpos($level3value['text'],$level3value['links'][$i]['what']);
+                            $len2[$i] = strlen($level3value['links'][$i]['what']);
+                        };
+                        for ($i = 0; $i < strlen($level3value['text']); $i++) {
+                            if (in_array($i,$pos2)) {
+                                echo '<a>';
+                                $k2 = array_search($i,$pos2);
+                                $end2 = $i + $len2[$k2];
+                                echo $level3value['text'][$i];
+                            }
+                            elseif ($i == $end2) {
+                                if (array_key_exists('icon',$level3value['links'][$k2])) {
+                                    echo ' <i class="' . $level3value['links'][$k2]['icon'] . '"></i>';
+                                };
+                                echo '</a>';
+                                echo $level3value['text'][$i];
+                            }
+                            else {
+                                echo $level3value['text'][$i];
+                            }
+                        } 
+                    }
+                    else {
+                        echo $level3value['text'];
+                    };
+                ?>
+            </p>
             <?php                                      
                                 }; /* non ci sono altre possibilità */
                             };
