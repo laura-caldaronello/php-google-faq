@@ -275,11 +275,12 @@
                     elseif (substr($level2key,0,1) == 'l' && ctype_digit(substr($level2key,1,1))) { /* lista */
                         echo '<ol>';
                         foreach ($level2value as $level3key => $level3value) {
-                            echo '<li>';
-                            if (substr($level2key,0,1) == 'p' && ctype_digit(substr($level2key,1,1))) { /* paragrafo */
+                            if (substr($level3key,0,1) == 'p' && ctype_digit(substr($level3key,1,1))) { /* paragrafo */
+                                echo '<li>';
                                 echo $level3value['text'];
+                                echo '</li>';
                             }
-                            elseif (substr($level2key,0,1) == 'l' && ctype_digit(substr($level2key,1,1))) { /* lista */
+                            elseif (substr($level3key,0,1) == 'l' && ctype_digit(substr($level3key,1,1))) { /* lista */
                                 echo '<ol>';
                                 foreach ($level3value as $level4key => $level4value) {
                                     echo '<li>';
@@ -288,7 +289,6 @@
                                 };
                                 echo '</ol>';
                             }; /* non ci sono altre possibilità */
-                            echo '</li>';
                         };
                         echo '</ol>';
                     }
