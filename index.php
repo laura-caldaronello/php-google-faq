@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Google FAQ</title>
@@ -223,7 +225,7 @@
                 <li>Norme sulla privacy</li>
                 <li>Termini di servizio</li>
                 <li>Tecnologie</li>
-                <li>Domande frequenti</li>
+                <li class="active">Domande frequenti</li>
             </ul>
         </nav>
     </header>
@@ -238,7 +240,36 @@
                 foreach ($level1value['answer'] as $level2key => $level2value) {
                     if (substr($level2key,0,1) == 'p' && ctype_digit(substr($level2key,1,1))) { /* paragrafo: cioè se la prima lettera è p e subito dopo c'è un numero, quindi ho qualcosa del tipo p1, p2,... */
         ?>
-        <p> <?php echo $level2value['text']; ?> </p>
+        <p>
+            <?php
+                if (array_key_exists('links',$level2value)) {
+                    $pos = [];
+                    $len = [];
+                    for ($i = 0; $i < count($level2value['links']); $i++) {
+                        $pos[$i] = strpos($level2value['text'],$level2value['links'][$i]['what']);
+                        $len[$i] = strlen($level2value['links'][$i]['what']);
+                    };
+                    for ($i = 0; $i < strlen($level2value['text']); $i++) {
+                        if (in_array($i,$pos)) {
+                            echo '<a>';
+                            $k = array_search($i,$pos);
+                            $end = $i + $len[$k];
+                            echo $level2value['text'][$i];
+                        }
+                        elseif ($i == $end) {
+                            echo '</a>';
+                            echo $level2value['text'][$i];
+                        }
+                        else {
+                            echo $level2value['text'][$i];
+                        }
+                    } 
+                }
+                else {
+                    echo $level2value['text'];
+                };
+            ?>
+        </p>
         <?php                
                     }
                     elseif (substr($level2key,0,1) == 'l' && ctype_digit(substr($level2key,1,1))) { /* lista */

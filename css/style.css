@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 /* selettori generici */
 
 p {
@@ -12,17 +16,22 @@ p {
 main h2 {
     margin-top: 50px;
 }
+a {
+    cursor: pointer;
+    color: blue;
+}
 
 /* selettori generici */
 
 header {
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     border-bottom: 1px solid lightgrey;
 }
 #header-top {
     height: 40px;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 #header-top > div {
     display: flex;
@@ -40,6 +49,11 @@ header nav ul {
 header nav ul li {
     display: inline-block;
     margin-right: 30px;
+}
+header nav ul li.active {
+    color: blue;
+    padding-bottom: 10px;
+    border-bottom: 3px solid blue;
 }
 
 main {
