@@ -10,8 +10,14 @@ body {
 
 /* selettori generici */
 
+.wrapper {
+    width: 70%;
+    margin: 0 auto;
+}
+
 p {
     margin: 20px 0;
+    line-height: 1.5em;
 }
 main h2 {
     margin-top: 50px;
@@ -21,11 +27,33 @@ a {
     color: blue;
 }
 
+.circle {
+    position: relative;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: green;
+    margin-left: 10px;
+}
+.circle::after {
+    content: 'L';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+}
+
 /* selettori generici */
 
 header {
+    position: fixed;
+    top: 0;
+    width: 100%;
     padding: 20px 20px 0 20px;
     border-bottom: 1px solid lightgrey;
+    color: grey;
+    background-color: white;
 }
 #header-top {
     height: 40px;
@@ -39,9 +67,14 @@ header {
 }
 #header-top h2 {
     display: inline-block;
+    font-weight: 400;
+    margin-left: 10px;
 }
 #header-top img {
     height: 60%;
+}
+#header-top i {
+    margin: -2px;
 }
 header nav ul {
     list-style: none;
@@ -57,13 +90,43 @@ header nav ul li.active {
 }
 
 main {
-    width: 70%;
-    margin: 0 auto;
+    padding-top: 100px;
+    color: rgb(75,75,75);
 }
 main li {
-    margin: 10px 0;
+    margin: 15px 0;
 }
 main ol > ol {
     margin-left: 20px;
     list-style-type: lower-alpha;
+}
+
+footer {
+    background-color: rgb(240,240,240);
+    padding: 15px 0;
+}
+footer .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer ul {
+    list-style: none;
+}
+footer ul li {
+    display: inline-block;
+    position: relative;
+    padding-right: 10px;
+    font-size: 0.8em;
+    color: grey;
+}
+footer ul li:not(:last-child)::after {
+    content: '.';
+    position: absolute;
+    bottom: 0.3em;
+    right: 0;
+}
+footer i {
+    transform: scaleX(-1);
+    vertical-align: middle;
 }
