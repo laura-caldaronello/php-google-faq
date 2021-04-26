@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Google FAQ</title>
 </head>
 <body>
@@ -199,57 +201,85 @@
         ];
     ?>
     <!-- /dato -->
+    
+    <header>
+        <div id="header-top">
+            <div>
+                <img src="img/Google_2015_logo-512.png">
+                <h2>Privacy e Termini</h2>
+            </div>
+            <div>
+                <div>
+                    <i class="fas fa-ellipsis-v"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+                <div>L</div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li>Introduzione</li>
+                <li>Norme sulla privacy</li>
+                <li>Termini di servizio</li>
+                <li>Tecnologie</li>
+                <li>Domande frequenti</li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- testo vero e proprio -->
-    <?php
-        foreach ($data as $level1key => $level1value) {
-    ?>
-    <h2> <?php echo $level1value['question']; ?> </h2>
-    <?php
-            foreach ($level1value['answer'] as $level2key => $level2value) {
-                if (substr($level2key,0,1) == 'p' && ctype_digit(substr($level2key,1,1))) { /* paragrafo: cioè se la prima lettera è p e subito dopo c'è un numero, quindi ho qualcosa del tipo p1, p2,... */
-    ?>
-    <p> <?php echo $level2value['text']; ?> </p>
-    <?php                
-                }
-                elseif (substr($level2key,0,1) == 'l' && ctype_digit(substr($level2key,1,1))) { /* lista */
-                    echo '<ol>';
-                    foreach ($level2value as $level3key => $level3value) {
-                        echo '<li>';
-                        if (substr($level2key,0,1) == 'p' && ctype_digit(substr($level2key,1,1))) { /* paragrafo */
-                            echo $level3value['text'];
-                        }
-                        elseif (substr($level2key,0,1) == 'l' && ctype_digit(substr($level2key,1,1))) { /* lista */
-                            echo '<ol>';
-                            foreach ($level3value as $level4key => $level4value) {
-                                echo '<li>';
-                                echo $level4value['text']; /* e mi fermo a questo livello con l'annidamento delle liste */
-                                echo '</li>';
-                            };
-                            echo '</ol>';
-                        }; /* non ci sono altre possibilità */
-                        echo '</li>';
-                    };
-                    echo '</ol>';
-                }
-                elseif (substr($level2key,0,1) == 's' && ctype_digit(substr($level2key,1,1))) { /* section */
-                    foreach ($level2value as $level3key => $level3value) {
-                        if ($level3key == 'title') {
-?>
-<h3> <?php echo $level3value; ?> </h3>
-<?php                                      
-                        }
-                        elseif (substr($level3key,0,1) == 'p' && ctype_digit(substr($level3key,1,1))) {
-?>
-<p> <?php echo $level3value['text']; ?> </p>
-<?php                                      
-                        }; /* non ci sono altre possibilità */
-                    };
-                }; /* non ci sono altre possibilità */
+    <main>
+        <!-- testo vero e proprio -->
+        <?php
+            foreach ($data as $level1key => $level1value) {
+        ?>
+        <h2> <?php echo $level1value['question']; ?> </h2>
+        <?php
+                foreach ($level1value['answer'] as $level2key => $level2value) {
+                    if (substr($level2key,0,1) == 'p' && ctype_digit(substr($level2key,1,1))) { /* paragrafo: cioè se la prima lettera è p e subito dopo c'è un numero, quindi ho qualcosa del tipo p1, p2,... */
+        ?>
+        <p> <?php echo $level2value['text']; ?> </p>
+        <?php                
+                    }
+                    elseif (substr($level2key,0,1) == 'l' && ctype_digit(substr($level2key,1,1))) { /* lista */
+                        echo '<ol>';
+                        foreach ($level2value as $level3key => $level3value) {
+                            echo '<li>';
+                            if (substr($level2key,0,1) == 'p' && ctype_digit(substr($level2key,1,1))) { /* paragrafo */
+                                echo $level3value['text'];
+                            }
+                            elseif (substr($level2key,0,1) == 'l' && ctype_digit(substr($level2key,1,1))) { /* lista */
+                                echo '<ol>';
+                                foreach ($level3value as $level4key => $level4value) {
+                                    echo '<li>';
+                                    echo $level4value['text']; /* e mi fermo a questo livello con l'annidamento delle liste */
+                                    echo '</li>';
+                                };
+                                echo '</ol>';
+                            }; /* non ci sono altre possibilità */
+                            echo '</li>';
+                        };
+                        echo '</ol>';
+                    }
+                    elseif (substr($level2key,0,1) == 's' && ctype_digit(substr($level2key,1,1))) { /* section */
+                        foreach ($level2value as $level3key => $level3value) {
+                            if ($level3key == 'title') {
+        ?>
+        <h3> <?php echo $level3value; ?> </h3>
+        <?php                                      
+                            }
+                            elseif (substr($level3key,0,1) == 'p' && ctype_digit(substr($level3key,1,1))) {
+        ?>
+        <p> <?php echo $level3value['text']; ?> </p>
+        <?php                                      
+                            }; /* non ci sono altre possibilità */
+                        };
+                    }; /* non ci sono altre possibilità */
+                };
             };
-        };
-    ?>
-    <!-- /testo vero e proprio -->
+        ?>
+        <!-- /testo vero e proprio -->
+    </main>
 
 </body>
 </html>
