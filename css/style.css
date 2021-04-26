@@ -129,4 +129,9 @@ footer ul li:not(:last-child)::after {
 footer i {
     transform: scaleX(-1);
     vertical-align: middle;
+    margin-right: 5px;
+    color: blue;
+}
+footer select {
+    width: 150px;
 }
